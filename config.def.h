@@ -61,6 +61,7 @@ const char * notmuch_db_path = "/home/thomas/Mail/";
  * uptime              system uptime                   NULL
  * username            username of current user        NULL
  * vol_perc            OSS/ALSA volume in percent      mixer file (/dev/mixer)
+ *                                                     sound card name on Linux (default)
  * wifi_perc           WiFi signal in percent          interface name (wlan0)
  * wifi_essid          WiFi ESSID                      interface name (wlan0)
  */
@@ -69,7 +70,7 @@ static const struct arg args[] = {
 
 	{ netspeed_rx, "RX: %8s | ", "enp3s0" },
 	{ netspeed_tx, "TX: %8s | ", "enp3s0" },
-	{ run_command, "VOL: %s | ", "amixer get Master | sed \"s/^[[:space:]]*Front.*\\[\\([[:digit:]]*%\\)\\].*/\\1/;t;d\" | head -1" },
+	{ vol_perc, "VOL: %s%% | ", "default" },
 	{ notmuch_query, "UNR: %s | ", "tag:unread" }, // Number of unread mails
 	{ datetime, "%s ;",           "%a %d %b %Y - %R" }, // Date and time
 	// BOTTOM BAR
