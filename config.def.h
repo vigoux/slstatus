@@ -6,6 +6,9 @@ const unsigned int interval = 1000;
 /* text to show if no value can be retrieved */
 static const char unknown_str[] = "n/a";
 
+/* Notmuch database path */
+const char * notmuch_db_path = "/home/thomas/Mail/";
+
 /* maximum output string length */
 #define MAXLEN 2048
 
@@ -63,8 +66,11 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
 	/* function format          argument */
+
+	{ netspeed_rx, "RX: %8s | ", "enp3s0" },
+	{ netspeed_tx, "TX: %8s | ", "enp3s0" },
 	{ run_command, "VOL: %s | ", "amixer get Master | sed \"s/^[[:space:]]*Front.*\\[\\([[:digit:]]*%\\)\\].*/\\1/;t;d\" | head -1" },
-	{ run_command, "UNR: %s | ", "notmuch count tag:unread" }, // Number of unread mails
+	{ notmuch_query, "UNR: %s | ", "tag:unread" }, // Number of unread mails
 	{ datetime, "%s ;",           "%a %d %b %Y - %R" }, // Date and time
 	// BOTTOM BAR
 	{ run_command, " %s | ", "calcurse -n | sed -n \"/\\[.*\\]/{ s/^[[:space:]]*//p}\"" },
